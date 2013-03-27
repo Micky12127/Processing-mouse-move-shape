@@ -2,7 +2,7 @@ package processing.Mouse;
 
 import processing.core.PApplet;
 
-public class Circle extends MoveShape {
+public class Circle extends OperateShape {
 	// 円の半径
 	float diameter;
 	

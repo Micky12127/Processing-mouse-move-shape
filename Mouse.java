@@ -5,40 +5,33 @@ import processing.core.*;
 
 public class Mouse extends PApplet {
 	
-	private ArrayList<MoveShape> shapes = new ArrayList<MoveShape>();
+	private ArrayList<OperateShape> shapes = new ArrayList<OperateShape>();
 	
-	// フレームレートをカウントするカウンター
-	private int counter = 0;
-	// マウスが移動した間のフレームレート数
-	private int moveMouseFps;
-	// マウスが押されたときのX座標, Y座標
-	private float mousePressedX, mousePressedY;
-	// マウスが離れたときのX座標, Y座標
-	private float mouseReleasedX, mouseReleasedY;
-	// マウスが押されたときの点と離れたときの点を結んだ線のなす角
-	private float mouseAngle;
-	// マウスが移動した距離
-	private float mouseDistance;
+	// 図形の数
+	private float randomShapesNum = random(2, 50);
+	private int shapesNum = (int) randomShapesNum;
 	
 	public void setup() {
 		size(1200, 700);
 		smooth();
+		frameRate(240);
+		for (int i = 0; i < shapesNum; i++) {
+			OperateShape os = new Circle(this, 50);
+			os.setX(random(50, 1150));
+			os.setY(random(50, 650));
+			os.setColor(color(random(0, 255), random(0, 255), random(0, 255)));
+			shapes.add(os);
+		}
 	}
 	public void draw() {
 		clearShape();
 		
-		if (!shapes.isEmpty()) {
-			if (!mousePressed) {
-				MoveShape moveShape = shapes.get(0);
-				moveShape.move();
+		for (OperateShape os : shapes) {
+			if (os.getSpeed() > 0) {
+				os.move();
 			} else {
-				MoveShape moveShape = shapes.get(0);
-				moveShape.display();
+				os.display();
 			}
-		}
-		
-		if (mousePressed) {
-			counter++;
 		}
 	}
 	
@@ -47,15 +40,7 @@ public class Mouse extends PApplet {
 		fill(255, 255, 255);
 		rect(0, 0, width, height);
 	}
-	
-	public void mouseDragged() {
-		if (!shapes.isEmpty()) {
-			MoveShape moveShape = shapes.get(0);
-			moveShape.setX(mouseX);
-			moveShape.setY(mouseY);
-		}
-	}
-	
+	/*	
 	public void mousePressed() {
 		mousePressedX = mouseX;
 		mousePressedY = mouseY;
@@ -79,7 +64,6 @@ public class Mouse extends PApplet {
 			moveShape.setColor(color(random(0, 255), random(0, 255), random(0, 255)));
 		}
 	}
-	
 	public void mouseReleased() {
 		MoveShape moveShape = shapes.get(0);
 		
@@ -100,4 +84,5 @@ public class Mouse extends PApplet {
 		
 		counter = 0;
 	}
+	*/
 }

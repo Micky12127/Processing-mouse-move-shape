@@ -3,8 +3,8 @@ package processing.Mouse;
 import processing.core.PApplet;
 
 public abstract class MoveShape extends Shape implements Movable {
-	private float speed, angle, friction;
-	public final double FRICTION = 0.99;
+	private float speed, angle;
+	public final double FRICTION = 0.9999999;
 	
 	public MoveShape(PApplet papplet) {
 		super(papplet);
@@ -28,8 +28,8 @@ public abstract class MoveShape extends Shape implements Movable {
 		if (speed != 0) {
 			speed *= FRICTION;
 		}
-		x += papplet.cos(papplet.radians(angle)) * speed;
-		y += papplet.sin(papplet.radians(angle)) * speed;
+		x += PApplet.cos(PApplet.radians(angle)) * speed;
+		y += PApplet.sin(PApplet.radians(angle)) * speed;
 	}
 	
 	public void move() {
