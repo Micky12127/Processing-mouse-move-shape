@@ -1,4 +1,4 @@
-package processing.Mouse;
+package processing;
 
 import processing.core.PApplet;
 
