@@ -1,10 +1,10 @@
-package processing.Mouse;
+package processing;
 
 import processing.core.PApplet;
 
 public abstract class Shape implements Displayable {
 	protected float x, y;
-	// Javaにはcolor型が存在しないので、int a = color(255, 255, 255);のように記述する
+	// Javaにはcolor型が存在しな�??で、int a = color(255, 255, 255);のように記述する
 	private int shapeColor, clickedShapeFlag;
 	protected PApplet papplet;
 	
@@ -32,7 +32,7 @@ public abstract class Shape implements Displayable {
 		return shapeColor;
 	}
 	
-	// 図形がクリックされたことを確認するためのフラグ(0ならクリックされていない、1ならクリックされている)
+	// 図形がクリ�?��されたことを確認するため�?フラグ(0ならクリ�?��されて�?���??1ならクリ�?��されて�?��)
 	public void setClickedShapeFlag(int clickedShapeFlagValue) {
 		clickedShapeFlag = clickedShapeFlagValue;
 	}

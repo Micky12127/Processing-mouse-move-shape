@@ -1,4 +1,4 @@
-package processing.Mouse;
+package processing;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -13,15 +13,15 @@ public abstract class OperateShape extends MoveShape implements MouseMotionListe
 		papplet.addMouseMotionListener(this);
 	}
 	
-	// フレームレートをカウントする
+	// フレー�?��ートをカウントす�?
 	private int mousePressedFps;
-	// マウスが移動した間のフレームレート数
+	// マウスが移動した間のフレー�?��ート数
 	private int mouseReleasedFps;
-	// マウスが押されたときのX座標, Y座標
+	// マウスが押されたとき�?X座�? Y座�?
 	private float mousePressedX, mousePressedY;
-	// マウスが離れたときのX座標, Y座標
+	// マウスが離れたとき�?X座�? Y座�?
 	private float mouseReleasedX, mouseReleasedY;
-	// マウスが押されたときの点と離れたときの点を結んだ線のなす角
+	// マウスが押されたとき�?点と離れたとき�?点を結ん�?���?なす�?
 	private float mouseAngle;
 	// マウスが移動した距離
 	private float mouseDistance;
