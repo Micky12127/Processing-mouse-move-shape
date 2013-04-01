@@ -5,7 +5,7 @@ import processing.core.PApplet;
 public abstract class Shape implements Displayable {
 	protected float x, y;
 	// Javaにはcolor型が存在しないので、int a = color(255, 255, 255);のように記述する
-	private int shapeColor;
+	private int shapeColor, clickedShapeFlag;
 	protected PApplet papplet;
 	
 	public Shape(PApplet papplet) {
@@ -30,5 +30,13 @@ public abstract class Shape implements Displayable {
 	}
 	public int getColor() {
 		return shapeColor;
+	}
+	
+	// 図形がクリックされたことを確認するためのフラグ(0ならクリックされていない、1ならクリックされている)
+	public void setClickedShapeFlag(int clickedShapeFlagValue) {
+		clickedShapeFlag = clickedShapeFlagValue;
+	}
+	public int getClickedShapeFlag() {
+		return clickedShapeFlag;
 	}
 }

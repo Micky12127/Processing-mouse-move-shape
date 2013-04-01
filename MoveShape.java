@@ -4,7 +4,7 @@ import processing.core.PApplet;
 
 public abstract class MoveShape extends Shape implements Movable {
 	private float speed, angle;
-	public final double FRICTION = 0.9999999;
+	public final double FRICTION = 0.997;
 	
 	public MoveShape(PApplet papplet) {
 		super(papplet);
@@ -37,24 +37,22 @@ public abstract class MoveShape extends Shape implements Movable {
 		
 		float widthFromCenter = getWidthFromCenter();
 		float heightFromCenter = getHeightFromCenter();
-		float centerPointX = getCenterPointX();
-		float centerPointY = getCenterPointY();
 		
-		if (centerPointX >= papplet.width - widthFromCenter) {
+		if (getX() >= papplet.width - widthFromCenter) {
 			setColor(papplet.color(papplet.random(0, 255), papplet.random(0, 255), papplet.random(0, 255)));
-			setCenterPointX(papplet.width - widthFromCenter);
+			setX(papplet.width - widthFromCenter);
 			angle = 180 - angle;
-		} else if(centerPointX <= widthFromCenter) {
+		} else if(getX() <= widthFromCenter) {
 			setColor(papplet.color(papplet.random(0, 255), papplet.random(0, 255), papplet.random(0, 255)));
-			setCenterPointX(widthFromCenter);
+			setX(widthFromCenter);
 			angle = 180 - angle;
-		} else if(centerPointY >= papplet.height - heightFromCenter) {
+		} else if(getY() >= papplet.height - heightFromCenter) {
 			setColor(papplet.color(papplet.random(0, 255), papplet.random(0, 255), papplet.random(0, 255)));
-			setCenterPointY(papplet.height - heightFromCenter);
+			setY(papplet.height - heightFromCenter);
 			angle = -angle;
-		} else if(centerPointY <= heightFromCenter) {
+		} else if(getY() <= heightFromCenter) {
 			setColor(papplet.color(papplet.random(0, 255), papplet.random(0, 255), papplet.random(0, 255)));
-			setCenterPointY(heightFromCenter);
+			setY(heightFromCenter);
 			angle = -angle;
 		}
 		

@@ -11,13 +11,12 @@ public abstract class OperateShape extends MoveShape implements MouseMotionListe
 		super(papplet);
 		papplet.addMouseListener(this);
 		papplet.addMouseMotionListener(this);
-		papplet.draw();
 	}
 	
 	// フレームレートをカウントする
-	private int fpsCounter = 0;
+	private int mousePressedFps;
 	// マウスが移動した間のフレームレート数
-	private int moveMouseFps;
+	private int mouseReleasedFps;
 	// マウスが押されたときのX座標, Y座標
 	private float mousePressedX, mousePressedY;
 	// マウスが離れたときのX座標, Y座標
@@ -32,31 +31,24 @@ public abstract class OperateShape extends MoveShape implements MouseMotionListe
 	}
 
 	public void mousePressed(MouseEvent e) {
+		mousePressedFps = papplet.frameCount;
 		mousePressedX = e.getX();
 		mousePressedY = e.getY();
-		fpsCounter++;
-		float radius = this.getWidthFromCenter();
-		float shapeCenterX = this.getCenterPointX();
-		float shapeCenterY = this.getCenterPointY();
-		float mouseAndShapeDistance = PApplet.dist(papplet.mouseX, papplet.mouseY, shapeCenterX, shapeCenterY);
 		
-		if (mouseAndShapeDistance < radius) {
+		if (this.getMouseInShape()) {
 			this.setX(e.getX());
 			this.setY(e.getY());
+			this.setSpeed(0);
+			this.setClickedShapeFlag(1);
 		}
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		fpsCounter++;
-		float radius = this.getWidthFromCenter();
-		float shapeCenterX = this.getCenterPointX();
-		float shapeCenterY = this.getCenterPointY();
-		float mouseAndShapeDistance = PApplet.dist(papplet.mouseX, papplet.mouseY, shapeCenterX, shapeCenterY);
+		mouseReleasedFps = papplet.frameCount;
 		
-		if (mouseAndShapeDistance < radius) {
+		if (this.getClickedShapeFlag() == 1) {
 			mouseReleasedX = e.getX();
 			mouseReleasedY = e.getY();
-			moveMouseFps = fpsCounter;
 			mouseDistance = PApplet.dist(mousePressedX, mousePressedY, mouseReleasedX, mouseReleasedY);
 			mouseAngle = PApplet.degrees(PApplet.atan((mousePressedY - mouseReleasedY) / (mousePressedX - mouseReleasedX)));
 
@@ -66,8 +58,9 @@ public abstract class OperateShape extends MoveShape implements MouseMotionListe
 				mouseAngle -= 180;
 			}
 
-			this.setSpeed(mouseDistance / moveMouseFps);
+			this.setSpeed(mouseDistance / (mouseReleasedFps - mousePressedFps));
 			this.setAngle(mouseAngle);
+			this.setClickedShapeFlag(0);
 		}
 	}
 
@@ -80,13 +73,7 @@ public abstract class OperateShape extends MoveShape implements MouseMotionListe
 	
 	// ---------- PApplet MouseMotionListener -------
 	public void mouseDragged(MouseEvent e) {
-		fpsCounter++;
-		float radius = this.getWidthFromCenter();
-		float shapeCenterX = this.getCenterPointX();
-		float shapeCenterY = this.getCenterPointY();
-		float mouseAndShapeDistance = PApplet.dist(papplet.mouseX, papplet.mouseY, shapeCenterX, shapeCenterY);
-		
-		if (mouseAndShapeDistance < radius) {
+		if (this.getClickedShapeFlag() == 1) {
 			this.setX(e.getX());
 			this.setY(e.getY());
 		}
@@ -95,4 +82,6 @@ public abstract class OperateShape extends MoveShape implements MouseMotionListe
 	public void mouseMoved(MouseEvent e) {
 	}
 	// ---------------------------------------------------
+	
+	public abstract boolean getMouseInShape(); 
 }
