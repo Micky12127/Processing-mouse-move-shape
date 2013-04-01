@@ -1,11 +1,11 @@
-package processing.Mouse;
+package processing;
 
 import processing.core.PApplet;
 
 public class Circle extends OperateShape {
-	// 円の半径
+	// �??半�?
 	float diameter;
-	// マウスが円内に入っているかを判定するための変数(半径、円の中心のXとY、マウスから円の中心までの距離)
+	// マウスが�?�?��入って�?��かを判定するため�?変数(半�??�??中�??XとY、�?ウスから�??中�?��での距離)
 	private float radius, circleCenterX, circleCenterY, mouseAndCircleDistance;
 	
 	Circle(PApplet papplet, float _diameter) {
